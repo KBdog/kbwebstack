@@ -13,9 +13,8 @@
 ## 预览
 
 * 项目已部署至`github`和`gitee`
-* `github`：[https://kbdog.github.io/kbwebstack-web](https://kbdog.github.io/kbwebstack-web/)
-* `gitee`：[https://kbdog.gitee.io/kbwebstack-web](https://kbdog.gitee.io/kbwebstack-web)
-* 后端已部署，正在准备备案，详情请看前端首页的公告
+* `github`：[https://kbdog.github.io/kbwebstack](https://kbdog.github.io/kbwebstack)
+* `gitee`：[https://kbdog.gitee.io/kbwebstack](https://kbdog.gitee.io/kbwebstack)
 
 ## 功能介绍
 1. 百度热点新闻爬取

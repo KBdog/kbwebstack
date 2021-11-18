@@ -24,9 +24,14 @@
           // prohitbit right mouse click
           document.oncontextmenu = new Function('event.returnValue=false')
           // prohitbit choose
-          document.onselectstart = new Function('event.returnValue=false')
+          //document.onselectstart = new Function('event.returnValue=false')
           // prohitbit console
-          document.onkeydown = new Function('event.returnValue=false')
+          // document.onkeydown = new Function('event.returnValue=false')
+          document.addEventListener('keydown', function(event){
+            if(event.keyCode==123||(event.ctrlKey&&event.shiftKey&&event.keyCode==73)){
+              return event.returnValue = false;
+            }
+          });
         })
     }
   }

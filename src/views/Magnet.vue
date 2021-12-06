@@ -135,7 +135,7 @@
                 this.initData();
                 const _this=this;
                 if(keyword==''){
-                    _this.$message.error("搜索关键词为空！")
+                    _this.$message.error("搜索关键词为空！");
                     return;
                 }
                 if(_this.magnetResources==''){
@@ -355,6 +355,14 @@
                     >=document.documentElement.offsetHeight;
                 //如果不在底部则不加载，直接中断返回
                 if(!isOnBottom){
+                    return;
+                }
+                if(_this.magnetResources==''){
+                    _this.$message.error("请选择磁力源！");
+                    return;
+                }
+                if(_this.keywordLabel==null||_this.keywordLabel==''){
+                    _this.$message.error("搜索关键词为空！");
                     return;
                 }
                 switch (_this.magnetResources.toString()) {

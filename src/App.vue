@@ -7,10 +7,53 @@
   export default{
     created(){
         //check console
-        // setInterval(() => {
-        //     debugger;
-        // }, 100);
-        
+        setInterval(() => {
+            debugger;
+        }, 100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // //prohitbit f12 keyEvent
         // document.addEventListener('keydown', function(event){
         //     return 123 != event.keyCode || (event.returnValue = false)

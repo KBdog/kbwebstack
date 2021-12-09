@@ -9,10 +9,10 @@
 ### [manhuaren爬虫工具](https://github.com/KBdog/crawler-comic-manhuaren)
 对`manhuaren`后端`token`解密并抓取漫画数据下载
 
-### [kb资源站后端](https://github.com/KBdog/kbWebStack-backend)
+### [kb资源站后端(仓库已关闭,等答辩完再开放)](https://github.com/KBdog/kbWebStack-backend)
 为`kb资源站`前端提供后端数据接口服务
 
-### [kb资源站前端](https://github.com/KBdog/kbWebStack-web)
+### [kb资源站前端](https://github.com/KBdog/kbwebstack)
 提供百度热点新闻爬取、磁力链接搜索、漫画搜索、影视资讯、在线小工具等功能
 
 ## 联系方式

@@ -7,9 +7,9 @@
   export default{
     created(){
         //check console
-        setInterval(() => {
-            debugger;
-        }, 100);
+        // setInterval(() => {
+        //     debugger;
+        // }, 100);
 
 
 

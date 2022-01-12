@@ -91,10 +91,15 @@
                 //区分漫画源
                 switch(_this.comicResources){
                     case "1":
+                        var timestamp=new Date().getTime();
+                        var uri="api/copymanga/search";
+                        var token=_this.getToken(timestamp,"/"+uri);
                         _this.$message.success("当前漫画源：拷贝漫画");
-                        _this.$axios.get(`${host.scheme}://${host.host}/api/copymanga/search`,{
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                             params:{
-                                keyword:finalKeyword
+                                keyword:finalKeyword,
+                                x_timestamp:timestamp,
+                                x_token:token
                             }
                         }).then(function(response){
                             if(response.data.code==200){

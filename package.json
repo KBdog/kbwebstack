@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.2",
+    "js-base64": "^3.7.2",
     "v-viewer": "^1.6.4",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",

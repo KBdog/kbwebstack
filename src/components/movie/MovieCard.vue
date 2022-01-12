@@ -58,8 +58,16 @@
         methods:{
             getMediaMessage(media){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=`api/douban/media/${media.mediaType}/${media.mediaId}`;
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/douban/media/${media.mediaType}/${media.mediaId}`).then(function(response){
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function(response){
                     if(response.data.code==200){
                         var mediaMessage=response.data.data;
                         _this.$router.push({

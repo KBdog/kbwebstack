@@ -58,6 +58,9 @@
             },
             search(keyword){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/douban/search";
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.initData();
                 keyword=keyword.trim();
                 if(keyword==''){
@@ -68,9 +71,11 @@
                 _this.isSearch=true;
                 _this.keywordLabel=keyword;
                 var finalKeyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
-                _this.$axios.get(`${host.scheme}://${host.host}/api/douban/search`,{
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                     params:{
-                        keyword:finalKeyword
+                        keyword:finalKeyword,
+                        x_timestamp:timestamp,
+                        x_token:token
                     }
                 }).then(function(response){
                     if(response.data.code==200){

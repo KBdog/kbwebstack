@@ -181,9 +181,17 @@
             zhongzilouSearch(keyword,pageNum){
                 keyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=encodeURI(`api/magnet/zhongzilou/${keyword}/${pageNum}`);
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.$message.success("当前为第"+pageNum+"页");
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/magnet/zhongzilou/${keyword}/${pageNum}`).then(function (response) {
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     let tmpMagnetList=response.data.data.magnetList;
                     let lastPageNum=response.data.data.lastPageNum;
                     if(tmpMagnetList.length>0){
@@ -214,9 +222,17 @@
             nyaSearch(keyword,pageNum){
                 keyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=encodeURI(`api/magnet/nya/0/${keyword}/${pageNum}`);
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.$message.success("当前为第"+pageNum+"页");
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/magnet/nya/0/${keyword}/${pageNum}`).then(function (response) {
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     let tmpMagnetList=response.data.data.magnetList;
                     let lastPageNum=response.data.data.lastPageNum;
                     if(tmpMagnetList.length>0){
@@ -247,9 +263,17 @@
             sukebaiNyaSearch(keyword,pageNum){
                 keyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=encodeURI(`api/magnet/nya/1/${keyword}/${pageNum}`);
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.$message.success("当前为第"+pageNum+"页");
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/magnet/nya/1/${keyword}/${pageNum}`).then(function (response) {
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     let tmpMagnetList=response.data.data.magnetList;
                     let lastPageNum=response.data.data.lastPageNum;
                     if(tmpMagnetList.length>0){
@@ -280,9 +304,17 @@
             cilishuSearch(keyword,pageNum){
                 keyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=encodeURI(`api/magnet/cilishu/${keyword}/${pageNum}`);
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.$message.success("当前为第"+pageNum+"页");
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/magnet/cilishu/${keyword}/${pageNum}`).then(function (response) {
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     let tmpMagnetList=response.data.data.magnetList;
                     let lastPageNum=response.data.data.lastPageNum;
                     if(tmpMagnetList.length>0){
@@ -313,9 +345,17 @@
             yihuagongSearch(keyword,pageNum){
                 keyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri=encodeURI(`api/magnet/yihuagong/${keyword}/${pageNum}`);
+                var token=_this.getToken(timestamp,"/"+uri);
                 _this.$message.success("当前为第"+pageNum+"页");
                 _this.isLoading=true;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/magnet/yihuagong/${keyword}/${pageNum}`).then(function (response) {
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     let tmpMagnetList=response.data.data.magnetList;
                     let lastPageNum=response.data.data.lastPageNum;
                     if(tmpMagnetList.length>0){

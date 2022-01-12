@@ -119,11 +119,16 @@
                 //区分漫画源
                 switch(_this.comicResource){
                     case "1":
-                        console.log(chapter)
-                        _this.$axios.get(`${host.scheme}://${host.host}/api/copymanga/pictureList`,{
+                        console.log(chapter);
+                        var timestamp=new Date().getTime();
+                        var uri="api/copymanga/pictureList";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                             params:{
                                 pathword:chapter.chapterPathWord,
-                                uuid:chapter.chapterUuid
+                                uuid:chapter.chapterUuid,
+                                x_timestamp:timestamp,
+                                x_token:token
                             }
                         }).then(function(response){
                             if(response.data.code==200){

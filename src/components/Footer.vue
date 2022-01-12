@@ -23,6 +23,7 @@
 
 <script>
     import host from "../api/HostAddress.vue";
+    let Base64 = require('js-base64').Base64;
     export default {
         name: "Footer",
         data(){
@@ -99,7 +100,15 @@
             //根据ip定位
             getCurrentCity(){
                 const _this=this;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/tools/ip/located?ipAddress=${_this.ip}`).then(function (response) {
+                var timestamp=new Date().getTime();
+                var uri="api/tools/ip/located";
+                var token=_this.getToken(timestamp,"/"+uri);
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}?ipAddress=${_this.ip}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     var message=response.data;
                     _this.ipAddress=message.data.location;
                     console.log(_this.ip+"-"+_this.ipAddress);
@@ -110,7 +119,15 @@
             //获取访客数
             getIPCount(){
                 const _this=this;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/visit/ip`).then(function (response) {
+                var timestamp=new Date().getTime();
+                var uri="api/visit/ip";
+                var token=_this.getToken(timestamp,"/"+uri);
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     _this.ipCount=response.data.data;
                 }).catch(error=>{
                     _this.$message.error("获取统计访客数出现错误:"+error);
@@ -119,7 +136,15 @@
             //获取访问量
             getPVCount(){
                 const _this=this;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/visit/pv`).then(function (response) {
+                var timestamp=new Date().getTime();
+                var uri="api/visit/pv";
+                var token=_this.getToken(timestamp,"/"+uri);
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     _this.pvCount=response.data.data
                 }).catch(error=>{
                     _this.$message.error("获取统计访问量出现错误:"+error);

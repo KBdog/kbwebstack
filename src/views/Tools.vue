@@ -186,13 +186,18 @@
             //bilibili视频号转换
             transferVideoNum(videoNumInput){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/bilibili/transfer";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(videoNumInput==null||videoNumInput==""){
                     _this.$message.error("请输入视频号!");
                     return;
                 }else {
-                    _this.$axios.get(`${host.scheme}://${host.host}/api/tools/bilibili/transfer`,{
+                    _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                         params:{
-                            "video":videoNumInput
+                            "video":videoNumInput,
+                            x_timestamp:timestamp,
+                            x_token:token
                         }
                     }).then(function (response) {
                         if(response.data.code==200){
@@ -209,14 +214,21 @@
             //json格式化
             formatJson(jsonString){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/json/format";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(jsonString==null||jsonString==""){
                     _this.$message.error("请输入JSON字符串!");
                     return;
                 }else {
-                    _this.$axios.post(`${host.scheme}://${host.host}/api/tools/json/format`,jsonString,{
+                    _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,jsonString,{
                         headers:{
                             "Content-Type": "application/json"
                         },
+                        params:{
+                            x_timestamp:timestamp,
+                            x_token:token
+                        }
                     }).then(function (response) {
                         if(response.data.code==200){
                             _this.formatJSONString=response.data.data;
@@ -233,13 +245,18 @@
             //时间戳转日期
             timestampToDate(timestamp){
                 const _this=this;
+                var x_timestamp=new Date().getTime();
+                var uri="api/tools/time/toDate";
+                var token=_this.getToken(x_timestamp,"/"+uri);
                 if(timestamp==null||timestamp==""){
                     _this.$message.error("请输入时间戳!");
                     return;
                 }else {
-                    _this.$axios.get(`${host.scheme}://${host.host}/api/tools/time/toDate`,{
+                    _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                         params:{
-                            timestamp:timestamp
+                            timestamp:timestamp,
+                            x_timestamp:x_timestamp,
+                            x_token:token
                         }
                     }).then(function (response) {
                         if(response.data.code==200){
@@ -257,13 +274,18 @@
             //日期转时间戳
             dateToTimeStamp(dateTime){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/time/toTimestamp";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(dateTime==null||dateTime==""){
                     _this.$message.error("请输入日期!");
                     return;
                 }else {
-                    _this.$axios.get(`${host.scheme}://${host.host}/api/tools/time/toTimestamp`,{
+                    _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                         params:{
-                            date:dateTime
+                            date:dateTime,
+                            x_timestamp:timestamp,
+                            x_token:token
                         }
                     }).then(function (response) {
                         if(response.data.code==200){
@@ -280,6 +302,9 @@
             //简繁体转换
             chineseTransfer(isTraditional,text){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/gb_big5/transfer";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(text==null||text==""){
                     _this.$message.error("请输入中文!");
                     return;
@@ -289,7 +314,12 @@
                         var obj=new Object();
                         obj.type="traditional";
                         obj.text=text;
-                        _this.$axios.post(`${host.scheme}://${host.host}/api/tools/gb_big5/transfer`,obj).then(function (response) {
+                        _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,obj,{
+                            params:{
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function (response) {
                             if(response.data.code==200){
                                 _this.textTransferResult=response.data.data;
                                 _this.$message.success("转换成功!");
@@ -305,7 +335,12 @@
                         var obj=new Object();
                         obj.type="simple";
                         obj.text=text;
-                        _this.$axios.post(`${host.scheme}://${host.host}/api/tools/gb_big5/transfer`,obj).then(function (response) {
+                        _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,obj,{
+                            params:{
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function (response) {
                             if(response.data.code==200){
                                 _this.textTransferResult=response.data.data;
                                 _this.$message.success("转换成功!");
@@ -322,6 +357,9 @@
             //Base64加密解密
             codeTextTransfer(isEncoding,codeTextWord){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/base64/transfer";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(codeTextWord==null||codeTextWord==""){
                     _this.$message.error("请输入要进行转换的字符串!");
                     return;
@@ -331,7 +369,12 @@
                         var obj=new Object();
                         obj.type="encode";
                         obj.text=codeTextWord;
-                        _this.$axios.post(`${host.scheme}://${host.host}/api/tools/base64/transfer`,obj).then(function (response) {
+                        _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,obj,{
+                            params:{
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function (response) {
                             if(response.data.code==200){
                                 _this.$message.success("加密成功!");
                                 _this.codeTextTransferResult=response.data.data;
@@ -345,7 +388,12 @@
                         var obj=new Object();
                         obj.type="decode";
                         obj.text=codeTextWord;
-                        _this.$axios.post(`${host.scheme}://${host.host}/api/tools/base64/transfer`,obj).then(function (response) {
+                        _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,obj,{
+                            params:{
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function (response) {
                             if(response.data.code==200){
                                 _this.codeTextTransferResult=response.data.data;
                                 _this.$message.success("解密成功!");
@@ -361,13 +409,18 @@
             //ip定位
             ipLocated(ipAddress){
                 const _this=this;
+                var timestamp=new Date().getTime();
+                var uri="api/tools/ip/located";
+                var token=_this.getToken(timestamp,"/"+uri);
                 if(ipAddress==null||ipAddress==""){
                     _this.$message.error("请输入要进行定位的IP地址!");
                     return;
                 }else {
-                    _this.$axios.get(`${host.scheme}://${host.host}/api/tools/ip/located`,{
+                    _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                         params:{
-                            ipAddress:ipAddress
+                            ipAddress:ipAddress,
+                            x_timestamp:timestamp,
+                            x_token:token
                         }
                     }).then(function (response) {
                         if(response.data.code==200){

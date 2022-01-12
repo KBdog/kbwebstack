@@ -78,7 +78,15 @@
             //获取所有评论
             getAllComment(){
                 const _this=this;
-                _this.$axios.get(`${host.scheme}://${host.host}/api/comment/all`).then(function (response) {
+                var timestamp=new Date().getTime();
+                var uri="api/comment/all";
+                var token=_this.getToken(timestamp,"/"+uri);
+                _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     //从后端拿到的评论列表
                     var commentList=response.data.data;
                     //写入前端的评论列表

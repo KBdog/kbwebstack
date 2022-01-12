@@ -91,7 +91,15 @@
                 commentJSON.email=_this.email;
                 commentJSON.websiteUrl=_this.netWork;
                 //请求后端提交评论
-                _this.$axios.post(`${host.scheme}://${host.host}/api/comment/push`,commentJSON).then(function (response) {
+                var timestamp=new Date().getTime();
+                var uri="api/comment/push";
+                var token=_this.getToken(timestamp,"/"+uri);
+                _this.$axios.post(`${host.scheme}://${host.host}/${uri}`,commentJSON,{
+                    params:{
+                        x_timestamp:timestamp,
+                        x_token:token
+                    }
+                }).then(function (response) {
                     if(response.data.code==200){
                         _this.$message.success("评论已发布,管理员审核后会展示在评论区,请耐心等待！");
                         setTimeout(function () {

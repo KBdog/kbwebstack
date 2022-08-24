@@ -7,15 +7,17 @@
         <el-tooltip :content="comic.comicName" placement="top">
             <el-link :underline="false" v-on:click="getChapter(comic)">
                 <el-card shadow="hover">
+                <!--漫画卡片-->
                 <div class="comic-card-content">
                     <div class="img">
                         <img :src="comic.comicCoverUrl" class="real-img-class" v-lazy="comic.comicCoverUrl" >
                     </div>
                     <div class="description">
-                        <p class="comic-name">
+                        <p :class="realResources=='1'?'comic-name':'comic-name2'">
                             {{comic.comicName}}
                         </p>
-                        <span class="comic-author">
+                        <!--拷贝漫画特有-->
+                        <span v-if="realResources=='1'" class="comic-author">
                             <p style="margin-bottom: 10px">
                                 作者：{{comicAuthorText}}
                             </p>
@@ -39,12 +41,13 @@
     export default {
         name: "ComicCard",
         props:{
-            comic:Object
+            comic:Object,
         },
         data(){
             return{
                 isLoading:false,
                 comicAuthorText:'',
+                realResources:''
             }
         },
         methods:{
@@ -101,6 +104,33 @@
                         });
                         break;
                     case "2":
+                        var timestamp=new Date().getTime();
+                        var uri="api/nhentai/content";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                comicContentUrl:comic.comicContentUrl,
+                                comicCoverUrl:comic.comicCoverUrl,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                _this.$router.push({
+                                    name:'comicPicture',
+                                    params:{
+                                        comicResource:'2',
+                                        chapterName:response.data.data.comicAlias,
+                                        pictureList:response.data.data.comicRealPictures
+                                    }
+                                });
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
+                        break;
                 }
 
             }
@@ -111,8 +141,10 @@
                 case "1":
                     //comicAuthors
                     _this.comicAuthorText=_this.aggString(_this.comic.comicAuthors);
+                    _this.realResources='1';
                     break;
                 case "2":
+                    _this.realResources='2';
                     break;
             }
 
@@ -168,6 +200,21 @@
         font-weight: bold;
         /*min-height: 67px;*/
         min-height: 40%;
+        /*margin-bottom: 10px;*/
+        margin-bottom: 0.625rem;
+    }
+    .comic-name2{
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+
+        font-size: 13px;
+        /*font-size: 0.875rem;*/
+        font-weight: bold;
+        /*min-height: 67px;*/
+        min-height: 100%;
         /*margin-bottom: 10px;*/
         margin-bottom: 0.625rem;
     }

@@ -7,6 +7,7 @@
                 <el-col :span="3">
                     <el-select v-model="comicResources" placeholder="漫画源" class="handle-select mr10">
                         <el-option key="1" label="拷贝漫画" value="1"></el-option>
+                        <el-option key="2" label="Nhentai" value="2"></el-option>
                     </el-select>
                 </el-col>
                 <!--输入框-->
@@ -30,10 +31,13 @@
              element-loading-text="搜索中.."
              element-loading-spinner="el-icon-loading"
             >
-            <div v-if="isSearch==true" class="real-comic-list">
-                <ComicCardList v-for="comic in comicList" :comic="comic"  :key="comic.comicPathWord"></ComicCardList>
+<!--            <div v-if="isSearch==true" class="real-comic-list">-->
+<!--                <ComicCardList v-for="comic in comicList" :comic="comic"  :key="comic.comicPathWord"></ComicCardList>-->
+<!--            </div>-->
+            <div v-if="isSearch===true" class="real-comic-list">
+                <ComicCardList v-for="comic in comicList" :comic="comic"
+                               :realResources="realResources" :comicResources="comicResources"></ComicCardList>
             </div>
-
         </div>
 
     </div>
@@ -47,6 +51,7 @@
         components:{ComicCardList},
         data(){
             return{
+                realResources:'',
                 comicResources:'',
                 isSearch:false,
                 keywordLabel:'',
@@ -54,6 +59,8 @@
                 isLoading:false,
                 comicList:[
                     {
+                        comicContentUrl:"",
+                        comicCover:"",
                         comicPathWord: "longyuhu",
                         comicName: "龍與虎",
                         comicAlias: "龍虎鬥，龙与虎,龙X虎,虎X龙,虎与龙,掌中萌虎,龙虎恋人，龍×虎，虎×龍，虎與龍，掌中萌虎，龍虎戀人，とらドラ!,龙虎斗",
@@ -77,7 +84,16 @@
             }
         },
         methods:{
+            //初始化静态数据
+            initData(){
+                const _this=this;
+                _this.isLoading=false;
+                _this.isSearch=false;
+                _this.keywordLabel='';
+                _this.comicList=[];
+            },
             search(keyword,comicResources){
+                this.initData();
                 const _this=this;
                 if(keyword==''||comicResources==''){
                     _this.$message.error("漫画源或关键字为空！");
@@ -89,8 +105,9 @@
                 _this.isLoading=true;
                 var finalKeyword=keyword.replaceAll(/[\[\]\/\\%&',;=?$~#^*!\x22]+/g," ");
                 //区分漫画源
-                switch(_this.comicResources){
+                switch(_this.comicResources.toString()){
                     case "1":
+                        _this.realResources='1';
                         var timestamp=new Date().getTime();
                         var uri="api/copymanga/search";
                         var token=_this.getToken(timestamp,"/"+uri);
@@ -112,8 +129,26 @@
                         });
                         break;
                     case "2":
-                        _this.$message.success("当前漫画源：动漫之家");
-                        _this.isLoading=false;
+                        _this.realResources='2';
+                        var timestamp=new Date().getTime();
+                        var uri="api/nhentai/search";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$message.success("当前漫画源：Nhentai");
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                keyword:finalKeyword,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                _this.comicList=response.data.data;
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
                         break;
                 }
             }

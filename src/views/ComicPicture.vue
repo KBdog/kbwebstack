@@ -11,13 +11,22 @@
         <div class="container1">
             <!--图片列表预览-->
             <viewer :images="picList">
-                <div class="imgTable" v-for="pic in picList" :key="pic.pageNum">
+                <!--拷贝漫画-->
+                <div v-if="comicResource!='2'" class="imgTable" v-for="pic in picList" :key="pic.pageNum">
                     <div class="imgClass">
-                        <!--拷贝漫画-->
                         <img :src="pic.picUrl" v-lazy="pic.picUrl">
                     </div>
                     <div>
                         第{{pic.pageNum}}页
+                    </div>
+                </div>
+                <!--nhentai-->
+                <div v-if="comicResource=='2'" class="imgTable" v-for="(pic,index) in picList" :key="index">
+                    <div class="imgClass">
+                        <img :src="pic" v-lazy="pic">
+                    </div>
+                    <div>
+                        第{{index+1}}页
                     </div>
                 </div>
             </viewer>
@@ -31,13 +40,15 @@
         data(){
             return{
                 chapterName:'',
-                picList:[]
+                picList:[],
+                comicResource:''
             }
         },
         methods:{
         },
         created() {
             const _this=this;
+            _this.comicResource=_this.$route.params.comicResource;
             _this.chapterName=_this.$route.params.chapterName;
             _this.picList=_this.$route.params.pictureList;
             //根据上个页面传递的数据判断是否是外部链接跳转

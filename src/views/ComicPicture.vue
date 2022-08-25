@@ -12,7 +12,7 @@
             <!--图片列表预览-->
             <viewer :images="picList">
                 <!--拷贝漫画-->
-                <div v-if="comicResource!='2'" class="imgTable" v-for="pic in picList" :key="pic.pageNum">
+                <div v-if="comicResource=='1'" class="imgTable" v-for="pic in picList" :key="pic.pageNum">
                     <div class="imgClass">
                         <img :src="pic.picUrl" v-lazy="pic.picUrl">
                     </div>
@@ -20,8 +20,8 @@
                         第{{pic.pageNum}}页
                     </div>
                 </div>
-                <!--nhentai-->
-                <div v-if="comicResource=='2'" class="imgTable" v-for="(pic,index) in picList" :key="index">
+                <!--nhentai--> <!--绅士漫画-->
+                <div v-if="comicResource=='2'||comicResource=='3'" class="imgTable" v-for="(pic,index) in picList" :key="index">
                     <div class="imgClass">
                         <img :src="pic" v-lazy="pic">
                     </div>

@@ -5,7 +5,7 @@
             <el-row :gutter="0" type="flex" align="middle" justify="center">
                 <!--输入框-->
                 <el-col :span="15">
-                    <el-input v-model="keyword" placeholder="数据源:豆瓣，搜索电影、电视剧、动画" class="handle-input mr10" @keyup.enter.native="search(keyword)"></el-input>
+                    <el-input v-model="keyword" clearable placeholder="数据源:豆瓣，搜索电影、电视剧、动画" class="handle-input mr10" @keyup.enter.native="search(keyword)"></el-input>
                 </el-col>
                 <!--搜索按钮-->
                 <el-col :span="2">

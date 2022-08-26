@@ -69,7 +69,8 @@
     .imgTable{
         display: inline-block;
         text-align: center;
-        width: 200px;
+        /*width: 200px;*/
+        width: 320px;
         /*height: 300px;*/
         /*margin-right: 1.8%;*/
         margin: 1.5%;
@@ -86,8 +87,10 @@
         border-bottom: 1px solid lightpink
     }
     .imgClass img{
-        width: 200px;
-        height: 250px;
+        /*width: 200px;*/
+        /*height: 250px;*/
+        width: 320px;
+        height: 370px;
     }
     .imgClass:hover{
         cursor: cell;

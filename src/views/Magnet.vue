@@ -14,7 +14,7 @@
                 </el-col>
                 <!--输入框-->
                 <el-col :span="15">
-                    <el-input v-model="keyword" placeholder="你想要的？" class="handle-input mr10" @keyup.enter.native="search(keyword)"></el-input>
+                    <el-input v-model="keyword" placeholder="你想要的？" clearable class="handle-input mr10" @keyup.enter.native="search(keyword)"></el-input>
                 </el-col>
                 <!--搜索按钮-->
                 <el-col :span="2">

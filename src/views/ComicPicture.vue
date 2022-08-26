@@ -66,33 +66,68 @@
     .container1{
         width: 100%;
     }
-    .imgTable{
-        display: inline-block;
-        text-align: center;
-        /*width: 200px;*/
-        width: 320px;
-        /*height: 300px;*/
-        /*margin-right: 1.8%;*/
-        margin: 1.5%;
-        /*margin-bottom: 20px;*/
-        border: 1px solid lightpink
-    }
     .crumbs{
         margin: 10px 0;
     }
-    .imgClass{
-        /*margin-bottom: 20px;*/
-        /*width: 200px;*/
-        margin-bottom: 2px;
-        border-bottom: 1px solid lightpink
+    /*图片渲染比例h:w=1.41*/
+    /*手机尺寸*/
+    @media (max-width: 412px) {
+        .imgTable{
+            display: inline-block;
+            text-align: center;
+            /*width: 200px;*/
+            width: 310px;
+            /*height: 300px;*/
+            /*margin-right: 1.8%;*/
+            margin: 1.5%;
+            /*margin-bottom: 20px;*/
+            border: 1px solid lightpink
+        }
+        .imgClass{
+            /*margin-bottom: 20px;*/
+            /*width: 200px;*/
+            margin-bottom: 2px;
+            border-bottom: 1px solid lightpink
+        }
+        .imgClass img{
+            /*width: 200px;*/
+            /*height: 250px;*/
+            width: 310px;
+            height: 437px;
+        }
+        .imgClass:hover{
+            cursor: cell;
+        }
     }
-    .imgClass img{
-        /*width: 200px;*/
-        /*height: 250px;*/
-        width: 320px;
-        height: 370px;
+
+    /*pc尺寸*/
+    @media (min-width: 413px)and (max-width: 1920px) {
+        .imgTable{
+            display: inline-block;
+            text-align: center;
+            /*width: 200px;*/
+            width: 200px;
+            /*height: 300px;*/
+            /*margin-right: 1.8%;*/
+            margin: 1.5%;
+            /*margin-bottom: 20px;*/
+            border: 1px solid lightpink
+        }
+        .imgClass{
+            /*margin-bottom: 20px;*/
+            /*width: 200px;*/
+            margin-bottom: 2px;
+            border-bottom: 1px solid lightpink
+        }
+        .imgClass img{
+            /*width: 200px;*/
+            /*height: 250px;*/
+            width: 200px;
+            height: 282px;
+        }
+        .imgClass:hover{
+            cursor: cell;
+        }
     }
-    .imgClass:hover{
-        cursor: cell;
-    }
+
 </style>

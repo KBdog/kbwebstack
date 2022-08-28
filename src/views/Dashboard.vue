@@ -60,7 +60,7 @@
             return {
                 //公告
                 // announcement:"后端已部署到阿里云并做了跨域处理，现在github和gitee都能正常访问数据，可以愉快冲浪了哦~",
-                announcement:"恭喜EDG获得S11全球总决赛冠军！！",
+                announcement:"欢迎来到kb资源站！",
                 news:[
                     {
                         cover:'https://inews.gtimg.com/newsapp_bt/0/13690243297/1000',

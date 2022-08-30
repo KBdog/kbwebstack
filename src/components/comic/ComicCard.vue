@@ -9,9 +9,11 @@
                 <el-card shadow="hover">
                 <!--漫画卡片-->
                 <div class="comic-card-content">
+
                     <div class="img">
                         <img :src="comic.comicCoverUrl" class="real-img-class" v-lazy="comic.comicCoverUrl" >
                     </div>
+
                     <div class="description">
 <!--                        <p :class="realResources=='2'||realResources=='3'?'comic-name2':'comic-name'">-->
 <!--                            {{comic.comicName}}-->

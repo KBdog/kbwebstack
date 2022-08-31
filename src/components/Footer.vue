@@ -1,22 +1,28 @@
 <template>
     <div class="footer">
         <div class="row">
-            <!--当前ip地址-->
-            <p class="ip">
-                您的IP地址：{{ip}}&nbsp;&nbsp;&nbsp;{{ipAddress}}
-            </p>
-            <!--当前时间-->
-            <p class="time">
-                {{currentTime}}
-            </p>
-            <!--统计信息-->
-            <p class="count">
-                本站访客数：{{ipCount}}&nbsp;&nbsp;&nbsp;本站总访问量：{{pvCount}}
-            </p>
-            <!--版权信息-->
-            <p  class="copyright">
-                Copyright kbdog ©2021-2022 本站所有资源均来源互联网,仅供技术研究,如果侵犯您的版权可以联系我删除
-            </p>
+            <!--引入小玩具-->
+            <div id="sakana-widget-takina" class="lycorisRecoil-left"></div>
+            <div class="row-content">
+                <!--当前ip地址-->
+                <p class="ip">
+                    您的IP地址：{{ip}}&nbsp;&nbsp;&nbsp;{{ipAddress}}
+                </p>
+                <!--当前时间-->
+                <p class="time">
+                    {{currentTime}}
+                </p>
+                <!--统计信息-->
+                <p class="count">
+                    本站访客数：{{ipCount}}&nbsp;&nbsp;&nbsp;本站总访问量：{{pvCount}}
+                </p>
+                <!--版权信息-->
+                <p  class="copyright">
+                    Copyright kbdog ©2021-2022 本站所有资源均来源互联网,仅供技术研究,如果侵犯您的版权可以联系我删除
+                </p>
+            </div>
+            <!--引入小玩具-->
+            <div id="sakana-widget-chisato" class="lycorisRecoil-right"></div>
         </div>
     </div>
 </template>
@@ -171,6 +177,28 @@
 </script>
 
 <style scoped>
+    /*手机尺寸*/
+    @media (max-width: 412px) {
+        .lycorisRecoil-right{
+            display: none;
+        }
+        .lycorisRecoil-left{
+            display: none;
+        }
+    }
+    /*pc尺寸*/
+    @media (min-width: 413px)and (max-width: 1920px) {
+        .lycorisRecoil-right{
+            position: fixed;
+            right: 50px;
+            bottom: 10px;
+        }
+        .lycorisRecoil-left{
+            position: fixed;
+            left: 50px;
+            bottom: 10px;
+        }
+    }
     .footer{
         background: #F5F5F5;
         text-align: center;

@@ -1,1 +1,20 @@
-<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><link rel="icon" href="/kbwebstack/favicon.ico"><title>kbwebstack-web</title><link href="/kbwebstack/static/css/app.329fd4a5.css" rel="preload" as="style"><link href="/kbwebstack/static/css/chunk-vendors.5871603d.css" rel="preload" as="style"><link href="/kbwebstack/static/js/app.af616202.js" rel="preload" as="script"><link href="/kbwebstack/static/js/chunk-vendors.f4c3c32b.js" rel="preload" as="script"><link href="/kbwebstack/static/css/chunk-vendors.5871603d.css" rel="stylesheet"><link href="/kbwebstack/static/css/app.329fd4a5.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but kbwebstack-web doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/kbwebstack/static/js/chunk-vendors.f4c3c32b.js"></script><script src="/kbwebstack/static/js/app.af616202.js"></script></body><script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script></html>
+<!DOCTYPE html><html lang=""><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><link rel="icon" href="/kbwebstack/favicon.ico"><title>kbwebstack-web</title><link href="/kbwebstack/static/css/app.40aa6511.css" rel="preload" as="style"><link href="/kbwebstack/static/css/chunk-vendors.5871603d.css" rel="preload" as="style"><link href="/kbwebstack/static/js/app.e9457fec.js" rel="preload" as="script"><link href="/kbwebstack/static/js/chunk-vendors.f4c3c32b.js" rel="preload" as="script"><link href="/kbwebstack/static/css/chunk-vendors.5871603d.css" rel="stylesheet"><link href="/kbwebstack/static/css/app.40aa6511.css" rel="stylesheet"></head><body><noscript><strong>We're sorry but kbwebstack-web doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript><div id="app"></div><script src="/kbwebstack/static/js/chunk-vendors.f4c3c32b.js"></script><script src="/kbwebstack/static/js/app.e9457fec.js"></script></body><script>function initSakanaWidget() {
+      //初始化千束
+      const chisato = SakanaWidget.getCharacter('chisato');
+      chisato.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/chisato.png`;
+      SakanaWidget.registerCharacter('chisato', chisato);
+      //初始化泷奈
+      const takina = SakanaWidget.getCharacter('takina');
+      takina.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/takina.png`;
+      SakanaWidget.registerCharacter('takina', takina);
+      //绑定千束
+      new SakanaWidget({ character: 'chisato' }).mount('#sakana-widget-chisato');
+      //绑定泷奈
+      new SakanaWidget({ character: 'takina' }).mount('#sakana-widget-takina');
+    }</script><script async onload="initSakanaWidget()" src="https://cdn.jsdelivr.net/npm/sakana-widget@2.2.1/lib/sakana.min.js"></script><style>.sakana-widget-canvas,a.sakana-widget-ctrl-item{
+      display: none;
+    }
+    .sakana-widget-ctrl{
+      justify-content: center;
+      width: 90px;
+    }</style><script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js"></script></html>

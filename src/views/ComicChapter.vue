@@ -25,17 +25,17 @@
                                     <div v-if="comicMessage.comicResource=='1'">
                                         漫画源：<el-tag type="success" size="medium" hit="true">拷贝漫画</el-tag>
                                     </div>
-                                    <div v-if="comicMessage.comicResource=='2'">
-                                        漫画源：<el-tag type="success" size="medium" hit="true">动漫之家</el-tag>
+                                    <div v-if="comicMessage.comicResource=='4'">
+                                        漫画源：<el-tag type="success" size="medium" hit="true">影子漫画</el-tag>
                                     </div>
                                 </div>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">别名：{{comicMessage.comicAlias}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">作者：{{comicAuthorText}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">状态：{{comicMessage.comicStatus}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">标签：{{comicTagsText}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">国家/地区：{{comicMessage.comicRegion}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">热度：{{comicMessage.comicPopular}}</p>
-                                <p style="display: block;text-overflow: ellipsis;text-align: left;margin-right: 3.125rem">简介：{{comicMessage.comicBrief}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">别名：{{comicMessage.comicAlias}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">作者：{{comicAuthorText}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">状态：{{comicMessage.comicStatus}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">标签：{{comicTagsText}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">国家/地区：{{comicMessage.comicRegion}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">热度：{{comicMessage.comicPopular}}</p>
+                                <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-right: 3.125rem">简介：{{comicMessage.comicBrief}}</p>
                             </div>
                         </div>
                     </div>
@@ -100,6 +100,15 @@
                 _this.comicAuthorText=_this.aggString(_this.comicMessage.comicAuthors);
                 _this.comicTagsText=_this.aggString(_this.comicMessage.comicTags);
             },
+            //初始化，给yingzimanga的各种标签赋值
+            getYingzimangaMessage(){
+                const _this=this;
+                _this.comicResource=_this.comicMessage.comicResource;
+                _this.chapterList=_this.comicMessage.comicChapterList;
+                // _this.comicAuthorText=_this.aggString(_this.comicMessage.comicAuthors);
+                // _this.comicTagsText=_this.aggString(_this.comicMessage.comicTags);
+
+            },
             //数组拼接字符串,使用/分隔
             aggString(array){
                 var result='';
@@ -146,7 +155,33 @@
                             _this.isLoading=false;
                         });
                         break;
-                    case "2":
+                    case "4":
+                        console.log(chapter);
+                        var timestamp=new Date().getTime();
+                        var uri="api/yingzimanga/pictureList";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                chapterUrl:chapter.chapterUrl,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                _this.$router.push({
+                                    name:'comicPicture',
+                                    params:{
+                                        chapterName:chapter.chapterName,
+                                        pictureList:response.data.data,
+                                        comicResource:'4'
+                                    }
+                                });
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
                         break;
                 }
             }
@@ -164,7 +199,8 @@
                 case "1":
                     _this.getCopymangaMessage();
                     break;
-                case "2":
+                case "4":
+                    _this.getYingzimangaMessage();
                     break;
             }
 

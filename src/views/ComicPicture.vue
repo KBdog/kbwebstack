@@ -29,6 +29,15 @@
                         第{{index+1}}页
                     </div>
                 </div>
+                <!--影子漫画-->
+                <div v-if="comicResource=='4'" class="imgTable" v-for="pic in picList" :key="pic.pageNum">
+                    <div class="imgClass">
+                        <img :src="pic.picUrl" v-lazy="pic.picUrl">
+                    </div>
+                    <div>
+                        第{{pic.pageNum}}页
+                    </div>
+                </div>
             </viewer>
         </div>
     </div>

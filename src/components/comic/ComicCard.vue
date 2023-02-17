@@ -27,6 +27,9 @@
                         <p v-if="realResources=='3'" class="comic-name3">
                             {{comic.comicName}}
                         </p>
+                        <p v-if="realResources=='4'" class="comic-name4">
+                            {{comic.comicName}}
+                        </p>
                         <!--拷贝漫画特有-->
                         <span v-if="realResources=='1'" class="comic-author">
                             <p style="margin-bottom: 10px">
@@ -170,6 +173,40 @@
                             _this.isLoading=false;
                         });
                         break;
+                    case "4":
+                        var timestamp=new Date().getTime();
+                        var uri="api/yingzimanga/chapterList";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                comicUrl:comic.comicUrl,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                //给漫画实体添加章节列表
+                                comic.comicChapterList=response.data.data;
+                                _this.$router.push({
+                                    name:'comicChapter',
+                                    params:{
+                                        comicMessage:comic
+                                    }
+                                })
+                            }else{
+                                _this.$router.push({
+                                    name:'comicChapter',
+                                    params:{
+                                        comicMessage:comic
+                                    }
+                                })
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
+                        break;
                 }
 
             }
@@ -187,6 +224,9 @@
                     break;
                 case "3":
                     _this.realResources='3';
+                    break;
+                case "4":
+                    _this.realResources='4';
                     break;
             }
 
@@ -261,6 +301,21 @@
         margin-bottom: 0.625rem;
     }
     .comic-name3{
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+
+        font-size: 14px;
+        /*font-size: 0.875rem;*/
+        font-weight: bold;
+        /*min-height: 67px;*/
+        min-height: 100%;
+        /*margin-bottom: 10px;*/
+        margin-bottom: 0.625rem;
+    }
+    .comic-name4{
         width: 100%;
         display: -webkit-box;
         -webkit-box-orient: vertical;

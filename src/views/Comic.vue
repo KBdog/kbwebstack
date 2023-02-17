@@ -9,6 +9,7 @@
                         <el-option key="1" label="拷贝漫画" value="1"></el-option>
                         <el-option key="2" label="Nhentai" value="2"></el-option>
                         <el-option key="3" label="绅士漫画" value="3"></el-option>
+                        <el-option key="4" label="影子漫画" value="4"></el-option>
                     </el-select>
                 </el-col>
                 <!--输入框-->
@@ -158,6 +159,28 @@
                         var uri="api/hentaiManga/search";
                         var token=_this.getToken(timestamp,"/"+uri);
                         _this.$message.success("当前漫画源：绅士漫画");
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                keyword:finalKeyword,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                _this.comicList=response.data.data;
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
+                        break;
+                    case "4":
+                        _this.realResources='4';
+                        var timestamp=new Date().getTime();
+                        var uri="api/yingzimanga/search";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$message.success("当前漫画源：影子漫画");
                         _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
                             params:{
                                 keyword:finalKeyword,

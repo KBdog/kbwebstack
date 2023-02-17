@@ -17,22 +17,22 @@
     <!-- built files will be auto injected -->
   </body>
   <!--引入右下角石蒜小玩具-->
-  <script>
-    function initSakanaWidget() {
-      //初始化千束
-      const chisato = SakanaWidget.getCharacter('chisato');
-      chisato.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/chisato.png`;
-      SakanaWidget.registerCharacter('chisato', chisato);
-      //初始化泷奈
-      const takina = SakanaWidget.getCharacter('takina');
-      takina.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/takina.png`;
-      SakanaWidget.registerCharacter('takina', takina);
-      //绑定千束
-      new SakanaWidget({ character: 'chisato' }).mount('#sakana-widget-chisato');
-      //绑定泷奈
-      new SakanaWidget({ character: 'takina' }).mount('#sakana-widget-takina');
-    }
-  </script>
+<!--  <script>-->
+<!--    function initSakanaWidget() {-->
+<!--      //初始化千束-->
+<!--      const chisato = SakanaWidget.getCharacter('chisato');-->
+<!--      chisato.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/chisato.png`;-->
+<!--      SakanaWidget.registerCharacter('chisato', chisato);-->
+<!--      //初始化泷奈-->
+<!--      const takina = SakanaWidget.getCharacter('takina');-->
+<!--      takina.image = `https://cdn.jsdelivr.net/gh/kbdog/emojiCDN@master/lycoris_recoil/takina.png`;-->
+<!--      SakanaWidget.registerCharacter('takina', takina);-->
+<!--      //绑定千束-->
+<!--      new SakanaWidget({ character: 'chisato' }).mount('#sakana-widget-chisato');-->
+<!--      //绑定泷奈-->
+<!--      new SakanaWidget({ character: 'takina' }).mount('#sakana-widget-takina');-->
+<!--    }-->
+<!--  </script>-->
   <script
           async
           onload="initSakanaWidget()"

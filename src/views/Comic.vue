@@ -7,8 +7,8 @@
                 <el-col :span="3">
                     <el-select v-model="comicResources" placeholder="漫画源" class="handle-select mr10">
                         <el-option key="1" label="拷贝漫画" value="1"></el-option>
-                        <el-option key="2" label="Nhentai" value="2"></el-option>
-                        <el-option key="3" label="绅士漫画" value="3"></el-option>
+<!--                        <el-option key="2" label="Nhentai" value="2"></el-option>-->
+<!--                        <el-option key="3" label="绅士漫画" value="3"></el-option>-->
                         <el-option key="4" label="影子漫画" value="4"></el-option>
                     </el-select>
                 </el-col>

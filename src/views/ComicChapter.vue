@@ -28,7 +28,11 @@
                                     <div v-if="comicMessage.comicResource=='4'">
                                         漫画源：<el-tag type="success" size="medium" hit="true">影子漫画</el-tag>
                                     </div>
+                                    <div v-if="comicMessage.comicResource=='5'">
+                                        漫画源：<el-tag type="success" size="medium" hit="true">漫蛙漫画</el-tag>
+                                    </div>
                                 </div>
+                                <!--拷贝-->
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">别名：{{comicMessage.comicAlias}}</p>
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">作者：{{comicAuthorText}}</p>
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">状态：{{comicMessage.comicStatus}}</p>
@@ -36,6 +40,9 @@
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">国家/地区：{{comicMessage.comicRegion}}</p>
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">热度：{{comicMessage.comicPopular}}</p>
                                 <p v-if="comicMessage.comicResource=='1'" style="display: block;text-overflow: ellipsis;text-align: left;margin-right: 3.125rem">简介：{{comicMessage.comicBrief}}</p>
+                                <!--漫蛙-->
+                                <p v-if="comicMessage.comicResource=='5'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">作者：{{comicAuthorText}}</p>
+                                <p v-if="comicMessage.comicResource=='5'" style="display: block;text-overflow: ellipsis;text-align: left;margin-bottom: 1.25rem">状态：{{comicMessage.comicStatus}}</p>
                             </div>
                         </div>
                     </div>
@@ -108,6 +115,13 @@
                 // _this.comicAuthorText=_this.aggString(_this.comicMessage.comicAuthors);
                 // _this.comicTagsText=_this.aggString(_this.comicMessage.comicTags);
 
+            },
+            //给manwamanga各种标签赋值
+            getManwamangaMessage(){
+                const _this=this;
+                _this.comicResource=_this.comicMessage.comicResource;
+                _this.chapterList=_this.comicMessage.comicChapterList;
+                _this.comicAuthorText=_this.comicMessage.comicAuthor;
             },
             //数组拼接字符串,使用/分隔
             aggString(array){
@@ -183,6 +197,34 @@
                             _this.isLoading=false;
                         });
                         break;
+                    case "5":
+                        console.log(chapter);
+                        var timestamp=new Date().getTime();
+                        var uri="api/manwamanga/pictureList";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                chapterUrl:chapter.chapterUrl,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                _this.$router.push({
+                                    name:'comicPicture',
+                                    params:{
+                                        chapterName:chapter.chapterName,
+                                        pictureList:response.data.data,
+                                        comicResource:'5'
+                                    }
+                                });
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
+                        break;
                 }
             }
         },
@@ -201,6 +243,9 @@
                     break;
                 case "4":
                     _this.getYingzimangaMessage();
+                    break;
+                case "5":
+                    _this.getManwamangaMessage();
                     break;
             }
 

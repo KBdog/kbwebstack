@@ -30,6 +30,9 @@
                         <p v-if="realResources=='4'" class="comic-name4">
                             {{comic.comicName}}
                         </p>
+                        <p v-if="realResources=='5'" class="comic-name5">
+                            {{comic.comicName}}
+                        </p>
                         <!--拷贝漫画特有-->
                         <span v-if="realResources=='1'" class="comic-author">
                             <p style="margin-bottom: 10px">
@@ -40,6 +43,15 @@
                             </p>
                             <p>
                                 热度：{{comic.comicPopular}}
+                            </p>
+                        </span>
+                        <!--漫蛙漫画特有-->
+                        <span v-if="realResources=='5'" class="comic-author">
+                            <p style="margin-bottom: 10px">
+                                作者：{{comic.comicAuthor}}
+                            </p>
+                            <p style="margin-bottom: 10px">
+                                状态：{{comic.comicStatus}}
                             </p>
                         </span>
                     </div>
@@ -207,6 +219,40 @@
                             _this.isLoading=false;
                         });
                         break;
+                    case "5":
+                        var timestamp=new Date().getTime();
+                        var uri="api/manwamanga/chapterList";
+                        var token=_this.getToken(timestamp,"/"+uri);
+                        _this.$axios.get(`${host.scheme}://${host.host}/${uri}`,{
+                            params:{
+                                comicUrl:comic.comicUrl,
+                                x_timestamp:timestamp,
+                                x_token:token
+                            }
+                        }).then(function(response){
+                            if(response.data.code==200){
+                                //给漫画实体添加章节列表
+                                comic.comicChapterList=response.data.data;
+                                _this.$router.push({
+                                    name:'comicChapter',
+                                    params:{
+                                        comicMessage:comic
+                                    }
+                                })
+                            }else{
+                                _this.$router.push({
+                                    name:'comicChapter',
+                                    params:{
+                                        comicMessage:comic
+                                    }
+                                })
+                            }
+                            _this.isLoading=false;
+                        }).catch(error=>{
+                            _this.$message.error(""+error);
+                            _this.isLoading=false;
+                        });
+                        break;
                 }
 
             }
@@ -227,6 +273,9 @@
                     break;
                 case "4":
                     _this.realResources='4';
+                    break;
+                case "5":
+                    _this.realResources='5';
                     break;
             }
 
@@ -327,6 +376,21 @@
         font-weight: bold;
         /*min-height: 67px;*/
         min-height: 100%;
+        /*margin-bottom: 10px;*/
+        margin-bottom: 0.625rem;
+    }
+    .comic-name5{
+        width: 100%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+
+        font-size: 14px;
+        /*font-size: 0.875rem;*/
+        font-weight: bold;
+        /*min-height: 67px;*/
+        min-height: 40%;
         /*margin-bottom: 10px;*/
         margin-bottom: 0.625rem;
     }

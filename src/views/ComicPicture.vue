@@ -38,6 +38,15 @@
                         第{{pic.pageNum}}页
                     </div>
                 </div>
+                <!--漫蛙-->
+                <div v-if="comicResource=='5'" class="imgTable" v-for="pic in picList" :key="pic.pageNum">
+                    <div class="imgClass">
+                        <img :src="pic.picUrl" v-lazy="pic.picUrl">
+                    </div>
+                    <div>
+                        第{{pic.pageNum}}页
+                    </div>
+                </div>
             </viewer>
         </div>
     </div>
